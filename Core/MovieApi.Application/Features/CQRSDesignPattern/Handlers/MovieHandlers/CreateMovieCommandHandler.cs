@@ -20,6 +20,9 @@ namespace MovieApi.Application.Features.CQRSDesignPattern.Handlers.MovieHandlers
 
 
 
+        //asagıda AutoMapper kullanılmadıgı için manuel olarak atama yapıldı
+        //eğer AutoMapper kullanılsaydı, mapping işlemi otomatik olarak yapılabilirdi
+
         public async void Handle(CreateMovieCommand command)
         {
             _context.Movies.Add(new Movie
