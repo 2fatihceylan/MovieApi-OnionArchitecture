@@ -4,6 +4,7 @@
     <Project Path="Core/MovieApi.Domain/MovieApi.Domain.csproj" Id="b9bd0cbe-a948-4044-8e96-7e1e8c6ed32c" />
   </Folder>
   <Folder Name="/Frontends/">
+    <Project Path="Frontends/MovieApi.Dto/MovieApi.Dto.csproj" Id="1478495b-3217-4528-8aef-ca7857584768" />
     <Project Path="Frontends/MovieApi.WebUI/MovieApi.WebUI.csproj" Id="a8329c70-579a-42a1-9d51-56212b006023" />
   </Folder>
   <Folder Name="/Infrastructure/">

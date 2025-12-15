@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace MovieApi.Application.Features.CQRSDesignPattern.Commands.MoveCommands
+namespace MovieApi.Dto.Dtos.MovieDtos
 {
-    public class UpdateMovieCommand
+    public class ResultMovieDto
     {
         public int MovieId { get; set; }
         public string Title { get; set; }

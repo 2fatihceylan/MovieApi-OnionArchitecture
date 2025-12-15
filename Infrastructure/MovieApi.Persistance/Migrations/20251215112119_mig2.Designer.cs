@@ -12,8 +12,8 @@ using MovieApi.Persistance.Context;
 namespace MovieApi.Persistance.Migrations
 {
     [DbContext(typeof(MovieContext))]
-    [Migration("20251210192551_mig1")]
-    partial class mig1
+    [Migration("20251215112119_mig2")]
+    partial class mig2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -97,8 +97,9 @@ namespace MovieApi.Persistance.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Duration")
-                        .HasColumnType("int");
+                    b.Property<string>("Duration")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal?>("Rating")
                         .HasColumnType("decimal(18,2)");

@@ -13,7 +13,7 @@ namespace MovieApi.Domain.Entities
         [Column(TypeName = "decimal(18,2)")]
         public decimal? Rating { get; set; }
         public string Description { get; set; }
-        public int Duration { get; set; }
+        public string Duration { get; set; }
         public DateTime ReleaseDate { get; set; }
         public string CreatedYear { get; set; }
         public bool Status { get; set; }
