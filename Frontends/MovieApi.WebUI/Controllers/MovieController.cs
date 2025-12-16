@@ -49,5 +49,27 @@ namespace MovieApi.WebUI.Controllers
 
             return View(); 
         }
+
+
+
+
+        public async Task<IActionResult> MovieDetail(int id)
+        {
+
+            //ViewBag.v1 = "Movie List";
+            ViewBag.v2 = "Movie List";
+            ViewBag.v3 = "Movie Name";
+
+
+            id = 0;
+
+
+
+            return View();
+        }
+
+
+
+
     }
 }
