@@ -14,4 +14,9 @@
     <ProjectReference Include="..\MovieApi.Dto\MovieApi.Dto.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Requirements\StitchAI\" />
+    <Folder Include="wwwroot\login\" />
+  </ItemGroup>
+
 </Project>

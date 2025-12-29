@@ -1,0 +1,15 @@
+Stitch AI Prompt – Türkçe (Film/Dizi Temalý Modern Login Sayfasý)
+
+Prompt:
+
+Film ve dizi temalý modern bir login sayfasý arayüzü. 
+Karanlýk ve sinematik bir atmosfer, hafif neon tonlarla vurgulanmýþ. 
+Arka planda popüler film ve dizi sahnelerinden oluþan bulanýk bir kolaj ve 
+üzerine yumuþak bir gradient efekt. Ortada, yarý saydam glassmorphism stilinde, 
+yuvarlatýlmýþ köþeli ve yumuþak gölgeli bir kart içinde giriþ formu. 
+Form alanlarýnda minimal ikonlar, temiz etiketler ve hafif ýþýklý kenarlar. 
+Üst tarafta film/dizi yorum platformunu temsil eden belirgin bir logo alaný. 
+Ýçerikte “E-posta”, “Þifre”, “Beni hatýrla” seçenekleri ve sinematik renk 
+parýltýsýna sahip bir birincil giriþ butonu yer alsýn. Ayrýca “Þifremi unuttum?” ve
+“Yeni hesap oluþtur” baðlantýlarý. Düzen responsive, minimal, premium ve profesyonel 
+UI/UX görünümünde olsun. Film/dizi inceleme sitesi için yüksek kaliteli, etkileyici bir tasarým.

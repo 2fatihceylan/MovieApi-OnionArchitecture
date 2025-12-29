@@ -1,0 +1,143 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Cinematic Login Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&amp;family=Noto+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec13a4",
+                        "background-light": "#f8f6f7",
+                        "background-dark": "#22101c",
+                    },
+                    fontFamily: {
+                        "display": ["Spline Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+    <style>
+        /* Custom scrollbar for webkit if needed */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #22101c;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ec13a4;
+            border-radius: 4px;
+        }
+    </style>
+    <style>
+        body {
+          min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+<body class="bg-background-dark font-display antialiased overflow-hidden selection:bg-primary selection:text-white">
+    <!-- Main Container -->
+    <div class="relative min-h-screen w-full flex items-center justify-center p-4">
+        <!-- Cinematic Background with Blur & Overlay -->
+        <div class="absolute inset-0 z-0">
+            <!-- Background Image Collage -->
+            <div class="absolute inset-0 bg-cover bg-center bg-no-repeat blur-[8px] scale-105" data-alt="Blurred collage of movie scenes with dramatic lighting" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCzhWgA4jSKeDrqYvqGNnKVecBUBNxikl-O2AuMnl-zCzJ3mk8yQoUbrvZVEipqqzMGA8mDZmEqmXA4PaWykAi-ZcFO2Ap4KpxYS7AZGEmTpfk255z1sfS9PnAdvD39Jwt6dHdTj4xJwVR3URiTZM2bmbC98lcy45-9jr5ZOVPAOZthhhaXDLsb8mTKGNl4Q5fa3Seh9IwLNtdyTr4Ua8jGHFam5CldMMwLkUC_UpydRC5J3XJ15hxFBmSJ2Q98LEZGyrCGFCJkS0w");'>
+            </div>
+            <!-- Dark Gradient Overlay for Readability -->
+            <div class="absolute inset-0 bg-gradient-to-b from-background-dark/80 via-background-dark/70 to-background-dark/90"></div>
+        </div>
+        <!-- Glassmorphism Login Card -->
+        <div class="relative z-10 w-full max-w-[420px] rounded-2xl border border-white/10 bg-background-dark/40 backdrop-blur-xl shadow-2xl p-6 md:p-8 flex flex-col gap-6 animate-fade-in-up">
+            <!-- Branding / Header -->
+            <div class="flex flex-col items-center gap-4">
+                <div class="relative group">
+                    <div class="absolute -inset-1 rounded-full bg-gradient-to-r from-primary to-purple-600 opacity-75 blur transition duration-1000 group-hover:opacity-100 group-hover:duration-200"></div>
+                    <div class="relative bg-black rounded-xl p-0.5">
+                        <div class="bg-center bg-no-repeat bg-cover rounded-xl h-20 w-20 shadow-lg" data-alt="Abstract cinema film reel icon glowing" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB3Cxvd-ZmBKvj7A5Ox1hbQDFZk-Gm6c7bohzfkzUZ-ypnl9OOp6vKTDj4SiUZUr6lLwXlUeNu9s7_A1VjLRv6lz7WLaL_8ci6aXMwVbn1X6qqwdHYn6AcZRtczFJC_l8itP96T18GHTOWseARi9xiR0d_C4dPW3NuVmpU7ik_X787vbc1rzj8CbJQaV8_MjSu44QWp9PurBc3AMwIrKei8XRocUqAs5N7GBOB6qBNeId0wLfywHuUbtsQmzhFwBrtCDgpKPv6Dtpk");'>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col items-center justify-center text-center">
+                    <h1 class="text-white text-3xl font-bold tracking-tight">CinePhile</h1>
+                    <p class="text-white/60 text-sm font-medium tracking-wide uppercase mt-1">Your Personal Cinema</p>
+                </div>
+            </div>
+            <!-- Login Form -->
+            <form class="flex flex-col gap-5 w-full" onsubmit="event.preventDefault();">
+                <!-- Email Field -->
+                <div class="flex flex-col gap-2">
+                    <label class="text-white/90 text-sm font-medium pl-1">Email Address</label>
+                    <div class="relative group">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            <span class="material-symbols-outlined text-white/40 group-focus-within:text-primary transition-colors">mail</span>
+                        </div>
+                        <input class="form-input w-full rounded-xl bg-black/20 border border-white/10 focus:border-primary focus:ring-1 focus:ring-primary text-white placeholder-white/30 h-12 pl-11 pr-4 transition-all duration-300 hover:border-white/20" placeholder="user@example.com" type="email" />
+                    </div>
+                </div>
+                <!-- Password Field -->
+                <div class="flex flex-col gap-2">
+                    <label class="text-white/90 text-sm font-medium pl-1">Password</label>
+                    <div class="relative group">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            <span class="material-symbols-outlined text-white/40 group-focus-within:text-primary transition-colors">lock</span>
+                        </div>
+                        <input class="form-input w-full rounded-xl bg-black/20 border border-white/10 focus:border-primary focus:ring-1 focus:ring-primary text-white placeholder-white/30 h-12 pl-11 pr-12 transition-all duration-300 hover:border-white/20" placeholder="••••••••" type="password" />
+                        <button class="absolute inset-y-0 right-0 pr-4 flex items-center text-white/40 hover:text-white transition-colors" type="button">
+                            <span class="material-symbols-outlined text-[20px]">visibility_off</span>
+                        </button>
+                    </div>
+                </div>
+                <!-- Remember Me & Forgot Password -->
+                <div class="flex items-center justify-between text-sm mt-1">
+                    <label class="flex items-center gap-2 cursor-pointer group">
+                        <div class="relative flex items-center justify-center size-5">
+                            <input class="peer h-5 w-5 appearance-none rounded border-2 border-white/20 bg-transparent checked:border-primary checked:bg-primary transition-all focus:ring-0 focus:ring-offset-0 cursor-pointer" type="checkbox" />
+                            <span class="material-symbols-outlined absolute text-white opacity-0 peer-checked:opacity-100 text-[16px] pointer-events-none font-bold">check</span>
+                        </div>
+                        <span class="text-white/70 group-hover:text-white transition-colors">Remember me</span>
+                    </label>
+                    <a class="text-primary hover:text-primary/80 font-medium transition-colors" href="#">Forgot Password?</a>
+                </div>
+                <!-- Primary Action Button -->
+                <button class="relative w-full group mt-2" type="submit">
+                    <div class="absolute -inset-0.5 bg-gradient-to-r from-primary to-[#b00e7a] rounded-xl opacity-50 blur group-hover:opacity-100 transition duration-300"></div>
+                    <div class="relative flex items-center justify-center h-12 w-full bg-primary rounded-xl text-white font-bold text-base tracking-wide shadow-xl hover:bg-[#d41193] active:scale-[0.98] transition-all duration-200">
+                        Log In
+                    </div>
+                </button>
+            </form>
+            <!-- Separator -->
+            <div class="relative flex py-1 items-center">
+                <div class="flex-grow border-t border-white/10"></div>
+                <span class="flex-shrink mx-4 text-white/30 text-xs uppercase tracking-widest">Or</span>
+                <div class="flex-grow border-t border-white/10"></div>
+            </div>
+            <!-- Social / Create Account -->
+            <div class="flex flex-col gap-6 text-center">
+                <p class="text-white/60 text-sm">
+                    Don't have an account?
+                    <a class="text-white font-semibold hover:text-primary transition-colors ml-1 underline decoration-primary/50 hover:decoration-primary underline-offset-4" href="#">Sign up now</a>
+                </p>
+            </div>
+        </div>
+        <!-- Footer Text (Optional for styling) -->
+        <div class="absolute bottom-6 z-10 text-white/20 text-xs font-light tracking-wider">
+            © 2024 CinePhile Inc.
+        </div>
+    </div>
+</body>
+</html>
