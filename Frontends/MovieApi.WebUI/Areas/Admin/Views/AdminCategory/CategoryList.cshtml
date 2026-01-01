@@ -1,8 +1,11 @@
-﻿@model List<AdminResultMovieDto>
+﻿
+@model List<AdminResultCategoryDto>
 @{
-    ViewData["Title"] = "Movie List";
+    ViewData["Title"] = "Category List";
     Layout = "~/Views/AdminLayout/Index.cshtml";
 }
+
+
 
 <style>
     :root {
@@ -113,18 +116,6 @@
         font-weight: 700;
     }
 
-    .rating-pill {
-        background: #fef3c7;
-        color: #92400e;
-        padding: 6px 10px;
-        border-radius: 999px;
-        font-weight: 600;
-        font-size: 13px;
-        display: inline-flex;
-        gap: 4px;
-        align-items: center;
-    }
-
     .status-pill {
         padding: 6px 12px;
         border-radius: 999px;
@@ -165,17 +156,17 @@
 <div class="admin-card">
     <div class="admin-header">
         <div class="admin-title">
-            🎬 Movie List
+            🗂️ Category List
         </div>
 
         <div class="admin-search">
             <ion-icon name="search-outline"></ion-icon>
-            <input type="text" placeholder="Search Movie..." />
+            <input type="text" placeholder="Search Category..." />
         </div>
 
-        <a href="#" class="btn-primary-soft">
+        <a asp-action="CreateCategory" class="btn-primary-soft">
             <ion-icon name="add-circle-outline"></ion-icon>
-            Add New Movie
+            Add New Category
         </a>
     </div>
 
@@ -184,10 +175,12 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Movie Name</th>
-                    <th>Rating</th>
-                    <th>Year</th>
+                    <th>Category Name</th>
+                    <th>Movie Count</th>
+                    <th>Review Count</th>
+                    <th>Avarage Rating</th>
                     <th>Status</th>
+            
                     <th>Delete</th>
                     <th>Update</th>
                     <th>Details</th>
@@ -197,18 +190,30 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td><div class="movie-id">@item.MovieId</div></td>
-                        <td><strong>@item.Title</strong></td>
+                        <td><div class="movie-id">@item.CategoryId</div></td>
+                        <td><strong>@item.CategoryName</strong></td>
                         <td>
-                            <span class="rating-pill">
-                                ⭐ @item.Rating
-                            </span>
+                            3
+                           @*  <span class="count-pill">@item.MovieCount</span> *@
                         </td>
-                        <td>@item.ReleaseDate</td>
+
                         <td>
-                            <span class="status-pill @(item.Status ? "active" : "passive")">
-                                @(item.Status ? "Active" : "Passive")
-                            </span>
+                            4
+                            @* <span class="count-pill">@item.ReviewCount</span> *@
+                        </td>
+
+                        <td>
+                            3.7
+                           @*  <span class="rating-pill">
+                                ⭐ @item.AvgRating.ToString()
+                            </span> *@
+                        </td>
+
+                        <td>
+                            Active
+                           @*  <span class="status-pill @(item.IsActive ? "active" : "passive")">
+                                @(item.IsActive ? "Active" : "Passive")
+                            </span> *@
                         </td>
                         <td><a href="#" class="action-btn btn-delete">Delete</a></td>
                         <td><a href="#" class="action-btn btn-update">Update</a></td>

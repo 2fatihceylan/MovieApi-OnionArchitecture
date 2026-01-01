@@ -1,0 +1,272 @@
+﻿@model AdminCreateCategoryDto
+@{
+    ViewData["Title"] = "Category List";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+
+
+<style>
+    :root {
+        --primary: #6366f1;
+        --success: #10b981;
+        --danger: #ef4444;
+        --warning: #f59e0b;
+        --bg-soft: #f8fafc;
+        --text-dark: #1f2937;
+        --radius: 12px;
+    }
+
+    body {
+        background: var(--bg-soft);
+        font-family: 'Inter', sans-serif;
+    }
+
+    *, *::before, *::after {
+        box-sizing: border-box;
+    }
+
+    ion-icon {
+        font-size: 20px;
+    }
+
+    .admin-card {
+        background: #ECE1F4;
+        border-radius: var(--radius);
+        padding: 28px;
+        box-shadow: 0 8px 24px rgba(0,0,0,.2);
+        max-width: 550px;
+        margin: 40px auto;
+    
+        border: .5px solid #6366F1;
+        
+    }
+
+    .admin-title {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: var(--text-dark);
+        margin-bottom: 24px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .form-group {
+        margin-bottom: 22px;
+
+    }
+
+        .form-group label {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 14px;
+            border-radius: var(--radius);
+            border: 1px solid #6366F1;
+            background: #fff;
+            font-size: 15px;
+            transition: 0.2s ease;
+        }
+
+            .form-group input:focus {
+                border-color: var(--primary);
+                box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+                outline: none;
+            }
+
+    .btn-area {
+        display: flex;
+        gap: 12px;
+        margin-top: 10px;
+    }
+
+    .btn-primary-soft {
+        background: var(--primary);
+        color: #fff;
+        padding: 12px 20px;
+        border-radius: var(--radius);
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        border: none;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+        .btn-primary-soft:hover {
+            background: #5850ec;
+        }
+
+    .btn-secondary {
+        background: #6b7280;
+        color: #fff;
+        padding: 12px 20px;
+        border-radius: var(--radius);
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        transition: 0.2s;
+    }
+
+        .btn-secondary:hover {
+            background: #565d65;
+        }
+</style>
+
+
+<div class="admin-card">
+    <div class="admin-title">
+        <ion-icon name="add-circle-outline"></ion-icon>
+        Add New Category
+    </div>
+
+    <form asp-action="CreateCategory" method="post">
+
+        <div class="form-group">
+            <label>Category Name</label>
+            <input asp-for="CategoryName" placeholder="Enter category name..." />
+        </div>
+
+        <div class="btn-area">
+            <button type="submit" class="btn-primary-soft">
+                <ion-icon name="save-outline"></ion-icon>
+                Save Category
+            </button>
+
+            <a asp-action="CategoryList" class="btn-secondary">
+                Cancel
+            </a>
+        </div>
+    </form>
+</div>
+
+
+
+
+
+@* @model AdminCreateCategoryDto
+
+<style>
+    :root {
+        --primary: #6366f1;
+        --success: #10b981;
+        --danger: #ef4444;
+        --warning: #f59e0b;
+        --bg-soft: #f8fafc;
+        --text-dark: #1f2937;
+        --text-muted: #6b7280;
+        --radius: 12px;
+    }
+
+    .admin-card {
+        background: #fff;
+        border-radius: var(--radius);
+        padding: 24px;
+        box-shadow: 0 8px 24px rgba(0,0,0,.04);
+        max-width: 650px;
+        margin: auto;
+    }
+
+    .admin-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-dark);
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .form-group {
+        margin-bottom: 18px;
+    }
+
+        .form-group label {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: var(--radius);
+            border: 1px solid #e5e7eb;
+            background: var(--bg-soft);
+            font-size: 15px;
+        }
+
+    .btn-primary-soft {
+        background: var(--primary);
+        color: #fff;
+        padding: 10px 18px;
+        border-radius: var(--radius);
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    .btn-secondary {
+        background: #6b7280;
+        color: #fff;
+        padding: 10px 18px;
+        border-radius: var(--radius);
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    .btn-area {
+        display: flex;
+        gap: 12px;
+        margin-top: 12px;
+    }
+</style>
+
+<div class="admin-card">
+
+    <div class="admin-title">
+        <ion-icon name="add-circle-outline"></ion-icon>
+        Add New Category
+    </div>
+
+    <form asp-action="CreateCategory" method="post">
+
+        <div class="form-group">
+            <label>Category Name</label>
+            <input asp-for="CategoryName" placeholder="Enter category name..." />
+        </div>
+
+     
+
+        <div class="btn-area">
+            <button type="submit" class="btn-primary-soft">
+                <ion-icon name="save-outline"></ion-icon>
+                Save Category
+            </button>
+
+            <a asp-action="CategoryList" class="btn-secondary">
+                Cancel
+            </a>
+        </div>
+
+    </form>
+
+</div>
+ *@
