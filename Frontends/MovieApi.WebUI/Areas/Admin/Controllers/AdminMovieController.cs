@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using MovieApi.Dto.Dtos.AdminCategoryDtos;
 using MovieApi.Dto.Dtos.AdminMovieDtos;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -57,8 +60,44 @@ namespace MovieApi.WebUI.Areas.Admin.Controllers
 
 
         [HttpGet]
-        public IActionResult CreateMovie()
+        public async Task<IActionResult> CreateMovie()
         {
+            var client = _httpClientFactory.CreateClient();
+            List<SelectOptionCategoryDto> categories = new List<SelectOptionCategoryDto>();
+
+            try
+            {
+                var responseMessage = await client.GetAsync("https://localhost:7216/api/Categories");
+
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    var jsonData = await responseMessage.Content.ReadAsStringAsync();
+                    var values = JsonConvert.DeserializeObject<List<SelectOptionCategoryDto>>(jsonData);
+                    categories = values ?? new List<SelectOptionCategoryDto>();
+                }
+                else
+                {
+                    // İsteğin başarısız olduğu durumda hata içeriğini okuyup gösterim için saklayabilirsiniz.
+                    var errorContent = await responseMessage.Content.ReadAsStringAsync();
+                    ViewBag.ErrorMessage = $"Kategori alınamadı. Durum: {(int)responseMessage.StatusCode} {responseMessage.ReasonPhrase}. İçerik: {errorContent}";
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ErrorMessage = $"Kategori çağrısı sırasında hata oluştu: {ex.Message}";
+            }
+
+            // Eğer uzaktan veri yoksa veya boşsa bir yedek liste kullan.
+            if (categories == null || !categories.Any())
+            {
+                categories = new List<SelectOptionCategoryDto>
+                {
+                    new SelectOptionCategoryDto { CategoryId = 1, CategoryName = "Ball" },
+                    new SelectOptionCategoryDto { CategoryId = 2, CategoryName = "Hat" }
+                };
+            }
+
+            ViewBag.Categories = categories;
             return View();
         }
 

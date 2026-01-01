@@ -159,8 +159,14 @@
 
 
             <div class="form-group">
-                <label>Category (0 - 10)</label>
-                <input asp-for="CategoryId" type="number" step="1" placeholder="9" />
+                <select asp-for="CategoryId" name="CategoryId" id="CategoryId" class="form-control">
+                    @foreach (var cat in ViewBag.Categories )
+                    {
+                        <option value="@cat.CategoryId">@cat.CategoryName</option>
+                    }
+                </select>
+                
+           
             </div>
         </div>
 
