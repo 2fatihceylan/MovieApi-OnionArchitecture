@@ -33,7 +33,7 @@
 					<div class="movie-item-style-2">
 						<img src="@movie.CoverImageUrl" alt="">
 						<div class="mv-item-infor">
-							<h6><a href="moviesingle.html">@movie.Title <span>(@movie.CreatedYear)</span></a></h6>
+							<h6><a asp-controller="Movie" asp-action="MovieDetail" asp-route-id="@movie.MovieId" >@movie.Title <span>(@movie.CreatedYear)</span></a></h6>
 							<p class="rate"><i class="ion-android-star"></i><span>@movie.Rating</span> /10</p>
 							<p class="describe">@movie.Description</p>
 							<p class="run-time"> Run Time: @movie.Duration’    .     <span>MMPA: PG-13 </span>    .     <span>Release: @movie.ReleaseDate</span></p>

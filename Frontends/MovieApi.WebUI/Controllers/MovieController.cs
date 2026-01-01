@@ -61,7 +61,19 @@ namespace MovieApi.WebUI.Controllers
             ViewBag.v3 = "Movie Name";
 
 
-            id = 0;
+            var client = _httpClientFactory.CreateClient();
+
+            var responseMessage = await client.GetAsync("https://localhost:7216/api/Movie/GetMovie?id=" + id);
+
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var jsonData = await responseMessage.Content.ReadAsStringAsync();
+
+                var movie = JsonConvert.DeserializeObject<ResultMovieDto>(jsonData);
+
+                return View(movie);
+
+            }
 
 
 

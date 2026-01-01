@@ -1,0 +1,170 @@
+﻿@using MovieApi.Dto.Dtos.AdminCastDtos
+@model List<AdminResultCastDto>
+@{
+    ViewData["Title"] = "Cast List";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<style>
+    .cast-table-container {
+        background: #ffffff;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+        .cast-table-container h2 {
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+    table.table {
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+        table.table thead {
+            background: #1f2937 !important;
+            color: #ffffff;
+        }
+
+        table.table tbody tr {
+            transition: background 0.2s ease;
+        }
+
+            table.table tbody tr:hover {
+                background: #f3f4f6;
+            }
+
+    .cast-photo {
+        width: 70px;
+        height: 70px;
+        object-fit: cover;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+
+    .action-buttons a {
+        margin-right: 5px;
+    }
+
+    .truncate-text {
+        max-width: 320px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+</style>
+
+
+<div class="container mt-4 cast-table-container">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Cast List</h2>
+
+        <a asp-controller="AdminCast"
+           asp-action="CreateCast"
+           class="btn btn-primary">
+            Add New Cast
+        </a>
+    </div>
+
+    <table class="table align-middle">
+        <thead>
+            <tr>
+                <th>Photo</th>
+                <th>Name</th>
+                <th>Title</th>
+                <th>Overview</th>
+                <th>Actions</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var cast in Model)
+            {
+                <tr>
+                    <td>
+                        <img src="@cast.ImageUrl"
+                             alt="@cast.Name"
+                             class="cast-photo" />
+                    </td>
+
+                    <td>
+                        <strong>@cast.Name @cast.Surname</strong>
+                    </td>
+
+                    <td>@cast.Title</td>
+
+                    <td class="truncate-text">
+                        @if (!string.IsNullOrEmpty(cast.Overview))
+                        {
+                            @(cast.Overview.Length > 80
+                                                ? cast.Overview.Substring(0, 80) + "..."
+                                                : cast.Overview)
+                        }
+                        else
+                        {
+                            <span class="text-muted">No overview</span>
+                        }
+                    </td>
+
+                    <td class="action-buttons">
+                        <a asp-controller="Cast"
+                           asp-action="Details"
+                           asp-route-id="@cast.CastId"
+                           class="btn btn-sm btn-info text-white">
+                            Details
+                        </a>
+
+
+                    </td>
+                    <td>
+
+                        <a asp-controller="Cast"
+                           asp-action="Edit"
+                           asp-route-id="@cast.CastId"
+                           class="btn btn-sm btn-warning">
+                            Edit
+                        </a>
+                    </td>
+                    <td>
+
+                        <a href="javascript:void(0)"
+                           class="action-btn btn-delete swal-delete"
+                           data-id="@cast.CastId">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    document.querySelectorAll(".swal-delete").forEach(btn => {
+        btn.addEventListener("click", function () {
+            const id = this.getAttribute("data-id");
+
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You are about to delete this Cast!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Yes, Delete it",
+                cancelButtonText: "Cancel"
+            }).then(result => {
+                if (result.isConfirmed) {
+                    window.location.href = `/Admin/AdminCast/DeleteCast/${id}`;
+                }
+            });
+        });
+    });
+</script>

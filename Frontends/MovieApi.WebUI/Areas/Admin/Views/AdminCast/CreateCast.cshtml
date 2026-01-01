@@ -1,0 +1,110 @@
+﻿@using MovieApi.Dto.Dtos.AdminCastDtos
+@model AdminCreateCastDto
+
+@{
+    ViewData["Title"] = "Cast List";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+
+
+<style>
+    :root {
+        --primary: #4f46e5;
+        --bg-soft: #f3f4f6;
+        --text-dark: #1f2937;
+        --radius: 12px;
+    }
+
+    body {
+        background: var(--bg-soft);
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .cast-card {
+        background: white;
+        padding: 30px;
+        border-radius: var(--radius);
+        max-width: 650px;
+        margin: 30px auto;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .cast-card h2 {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 20px;
+        color: var(--text-dark);
+    }
+
+    .form-control {
+        border-radius: var(--radius);
+        padding: 12px;
+        border: 1px solid #d1d5db;
+    }
+
+    .form-label {
+        font-weight: 500;
+        margin-bottom: 6px;
+        color: var(--text-dark);
+    }
+
+    .btn-primary {
+        background: var(--primary);
+        border-radius: var(--radius);
+        padding: 12px 20px;
+        border: none;
+        width: 100%;
+        font-size: 16px;
+        font-weight: 600;
+    }
+</style>
+
+<div class="cast-card">
+    <h2>Yeni Oyuncu / Cast Ekle</h2>
+
+    <form asp-action="CreateCast" method="post">
+
+        <!-- Title -->
+        <div class="mb-3">
+            <label class="form-label">Title (Ünvan)</label>
+            <input asp-for="Title" class="form-control" placeholder="Ör: Actor, Director, Producer" />
+        </div>
+
+        <!-- Name -->
+        <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input asp-for="Name" class="form-control" placeholder="Ad" />
+        </div>
+
+        <!-- Surname -->
+        <div class="mb-3">
+            <label class="form-label">Surname</label>
+            <input asp-for="Surname" class="form-control" placeholder="Soyad" />
+        </div>
+
+        <!-- ImageUrl -->
+        <div class="mb-3">
+            <label class="form-label">Image URL</label>
+            <input asp-for="ImageUrl" class="form-control" placeholder="Oyuncu fotoğrafı URL" />
+        </div>
+
+        <!-- Overview -->
+        <div class="mb-3">
+            <label class="form-label">Overview</label>
+            <textarea asp-for="Overview" rows="3" class="form-control" placeholder="Kısa açıklama"></textarea>
+        </div>
+
+        <!-- Biography -->
+        <div class="mb-3">
+            <label class="form-label">Biography</label>
+            <textarea asp-for="Biography" rows="5" class="form-control" placeholder="Oyuncunun biyografisi"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Cast Kaydet</button>
+
+        <a asp-action="CastList" class="btn-secondary">
+            Cancel
+        </a>
+    </form>
+</div>

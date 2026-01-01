@@ -5,4 +5,9 @@
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+    <a asp-controller="Movie" asp-action="MovieList">Movie List</a>
+    <a asp-controller="Movie" asp-action="MovieDetail">Movie Detail</a>
+    <a asp-area="Admin" asp-controller="AdminMovie" asp-action="MovieList">aDMİN Movie List</a>
+    <a asp-area="Admin" asp-controller="AdminCategory" asp-action="CategoryList">ADMİN CATEGORY List</a>
 </div>
