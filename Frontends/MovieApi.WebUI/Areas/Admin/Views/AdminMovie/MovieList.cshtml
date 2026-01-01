@@ -173,7 +173,7 @@
             <input type="text" placeholder="Search Movie..." />
         </div>
 
-        <a href="#" class="btn-primary-soft">
+        <a asp-action="CreateMovie" class="btn-primary-soft">
             <ion-icon name="add-circle-outline"></ion-icon>
             Add New Movie
         </a>
@@ -206,11 +206,25 @@
                         </td>
                         <td>@item.ReleaseDate</td>
                         <td>
-                            <span class="status-pill @(item.Status ? "active" : "passive")">
-                                @(item.Status ? "Active" : "Passive")
+                            @{
+                                bool isActive = item.Status != null &&
+                                (item.Status.Equals("true", StringComparison.OrdinalIgnoreCase) ||
+                                item.Status.Equals("active", StringComparison.OrdinalIgnoreCase) ||
+                                item.Status == "1");
+                            }
+
+                            <span class="status-pill @(isActive ? "active" : "passive")">
+                                @(isActive ? "Active" : "Passive")
                             </span>
                         </td>
-                        <td><a href="#" class="action-btn btn-delete">Delete</a></td>
+                        <td>
+
+                            <a href="javascript:void(0)"
+                               class="action-btn btn-delete swal-delete"
+                               data-id="@item.MovieId">
+                                Delete
+                            </a>
+                        </td>
                         <td><a href="#" class="action-btn btn-update">Update</a></td>
                         <td><a href="#" class="action-btn btn-detail">Details</a></td>
                     </tr>
@@ -219,3 +233,26 @@
         </table>
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    document.querySelectorAll(".swal-delete").forEach(btn => {
+        btn.addEventListener("click", function () {
+            const id = this.getAttribute("data-id");
+
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You are about to delete this Movie!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Yes, Delete it",
+                cancelButtonText: "Cancel"
+            }).then(result => {
+                if (result.isConfirmed) {
+                    window.location.href = `/Admin/AdminMovie/DeleteMovie/${id}`;
+                }
+            });
+        });
+    });
+</script>

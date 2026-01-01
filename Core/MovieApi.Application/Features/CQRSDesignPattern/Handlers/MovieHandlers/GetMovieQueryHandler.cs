@@ -35,7 +35,8 @@ namespace MovieApi.Application.Features.CQRSDesignPattern.Handlers.MovieHandlers
                 Duration = x.Duration,
                 ReleaseDate = x.ReleaseDate,
                 CreatedYear = x.CreatedYear,
-                Status = x.Status
+                Status = x.Status,
+                CategoryId = x.CategoryId
 
             }).ToList();
         }

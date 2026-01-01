@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace MovieApi.Application.Features.CQRSDesignPattern.Results.MovieResults
+namespace MovieApi.Dto.Dtos.AdminMovieDtos
 {
-    public class GetMovieByIdQueryResult
+    public class AdminCreateMovieDto
     {
-
-        public int MovieId { get; set; }
         public string Title { get; set; }
         public string CoverImageUrl { get; set; }
+
         public decimal? Rating { get; set; }
         public string Description { get; set; }
         public string Duration { get; set; }

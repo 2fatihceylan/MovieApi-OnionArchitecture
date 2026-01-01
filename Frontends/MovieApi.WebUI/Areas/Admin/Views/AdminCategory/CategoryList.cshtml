@@ -215,7 +215,16 @@
                                 @(item.IsActive ? "Active" : "Passive")
                             </span> *@
                         </td>
-                        <td><a href="#" class="action-btn btn-delete">Delete</a></td>
+                        <td>
+
+
+                            <a href="javascript:void(0)"
+                               class="action-btn btn-delete swal-delete"
+                               data-id="@item.CategoryId">
+                                Delete
+                            </a>
+
+                        </td>
                         <td><a href="#" class="action-btn btn-update">Update</a></td>
                         <td><a href="#" class="action-btn btn-detail">Details</a></td>
                     </tr>
@@ -224,3 +233,27 @@
         </table>
     </div>
 </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    document.querySelectorAll(".swal-delete").forEach(btn => {
+        btn.addEventListener("click", function () {
+            const id = this.getAttribute("data-id");
+
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You are about to delete this Category!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Yes, Delete it",
+                cancelButtonText: "Cancel"
+            }).then(result => {
+                if (result.isConfirmed) {
+                    window.location.href = `/Admin/AdminCategory/DeleteCategory/${id}`;
+                }
+            });
+        });
+    });
+</script>

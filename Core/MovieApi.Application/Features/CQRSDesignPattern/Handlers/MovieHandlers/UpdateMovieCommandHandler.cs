@@ -33,6 +33,7 @@ namespace MovieApi.Application.Features.CQRSDesignPattern.Handlers.MovieHandlers
             value.ReleaseDate = command.ReleaseDate;
             value.CreatedYear = command.CreatedYear;
             value.Status = command.Status;
+            value.CategoryId = command.CategoryId;
 
 
             await _context.SaveChangesAsync();
