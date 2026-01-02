@@ -2,11 +2,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MovieApi.Application.Features.CQRSDesignPattern.Handlers.CategoryHandlers;
 using MovieApi.Application.Features.CQRSDesignPattern.Handlers.MovieHandlers;
+using MovieApi.Application.Features.CQRSDesignPattern.Handlers.SeriesHandlers;
 using MovieApi.Application.Features.CQRSDesignPattern.Handlers.UserRegisterHandler;
 using MovieApi.Application.Features.MediatorDesignPattern.Handlers.CastHandlers;
 using MovieApi.Application.Features.MediatorDesignPattern.Handlers.TagHandlers;
 using MovieApi.Persistance.Context;
 using MovieApi.Persistance.Identity;
+using MovieApi.WebApi.Extensions;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -32,21 +34,11 @@ builder.Services.AddDbContext<MovieContext>(options =>
 
 
 
-
-
 //CQRS
-builder.Services.AddScoped<GetCategoryQueryHandlers>();
-builder.Services.AddScoped<GetCategoryByIdQueryHandler>();
-builder.Services.AddScoped<CreateCategoryCommandHandler>();
-builder.Services.AddScoped<UpdateCategoryCommadHandler>();
-builder.Services.AddScoped<RemoveCategoryCommandHandler>();
-builder.Services.AddScoped<GetMovieQueryHandler>();
-builder.Services.AddScoped<GetMovieByIdQueryHandler>();
-builder.Services.AddScoped<CreateMovieCommandHandler>();
-builder.Services.AddScoped<UpdateMovieCommandHandler>();
-builder.Services.AddScoped<RemoveMovieCommandHandler>();
+builder.Services.AddApplicationServices();
 
-builder.Services.AddScoped<CreateUserRegisterCommandHandler>();
+
+
 
 
 
@@ -79,6 +71,21 @@ if (app.Environment.IsDevelopment())
         x.SwaggerEndpoint("/swagger/v1/swagger.json","My Api V1");
     });
 }
+
+//browsarda swagger açýlmasý için
+app.Use(async (context, next) =>
+{
+    if (context.Request.Path == "/")
+    {
+        context.Response.Redirect("/swagger/index.html");
+        return;
+    }
+    await next();
+});
+
+
+
+
 
 app.UseHttpsRedirection();
 
