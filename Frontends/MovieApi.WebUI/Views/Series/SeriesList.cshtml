@@ -1,0 +1,125 @@
+﻿@model List<ResultSeriesDto>
+@{
+    ViewData["Title"] = "MovieList";
+    Layout = "~/Views/UserWebUILayout/LayoutUI.cshtml";
+}
+
+
+<div class="page-single movie_list">
+    <div class="container">
+        <div class="row ipad-width2">
+            <div class="col-md-8 col-sm-12 col-xs-12">
+                <div class="topbar-filter">
+                    <p>Found <span>@Model.Count series</span> in total</p>
+                    <label>Sort by:</label>
+                    <select>
+                        <option value="popularity">Popularity Descending</option>
+                        <option value="popularity">Popularity Ascending</option>
+                        <option value="rating">Rating Descending</option>
+                        <option value="rating">Rating Ascending</option>
+                        <option value="date">First Air Date Descending</option>
+                        <option value="date">First Air Date Ascending</option>
+                    </select>
+                    <a href="#" class="list"><i class="ion-ios-list-outline active"></i></a>
+                    <a href="#" class="grid"><i class="ion-grid"></i></a>
+                </div>
+
+                @foreach (var series in Model)
+                {
+                    <div class="movie-item-style-2">
+                        <img src="@series.CoverImageUrl" alt="@series.Title">
+                        <div class="mv-item-infor">
+                            <h6>
+                                <a asp-controller="Series"
+                                   asp-action="SeriesDetail"
+                                   asp-route-id="@series.SeriesId">
+                                    @series.Title <span>(@series.CreatedYear)</span>
+                                </a>
+                            </h6>
+
+                            <p class="rate">
+                                <i class="ion-android-star"></i>
+                                <span>@(series.Rating ?? 0)</span> /10
+                            </p>
+
+                            <p class="describe">
+                                @series.Description
+                            </p>
+
+                            <p class="run-time">
+                                Avg Episode: @(series.AverageEpisodeDuration ?? 0) min
+                                . <span>Status: @series.Status</span>
+                                . <span>First Air: @series.FirstAirDate.ToString("yyyy-MM-dd")</span>
+                            </p>
+
+                            <p>Seasons: <strong>@series.SeasonCount</strong></p>
+                            <p>Episodes: <strong>@series.EpisodeCount</strong></p>
+                        </div>
+                    </div>
+                }
+
+                <div class="topbar-filter">
+                    <label>Series per page:</label>
+                    <select>
+                        <option value="range">5 Series</option>
+                        <option value="range">10 Series</option>
+                    </select>
+                    <div class="pagination2">
+                        <span>Page 1 of 2:</span>
+                        <a class="active" href="#">1</a>
+                        <a href="#">2</a>
+                        <a href="#"><i class="ion-arrow-right-b"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SIDEBAR (AYNI – DEĞİŞMEDİ) -->
+            <div class="col-md-4 col-sm-12 col-xs-12">
+                <div class="sidebar">
+                    <div class="searh-form">
+                        <h4 class="sb-title">Search for series</h4>
+                        <form class="form-style-1">
+                            <div class="row">
+                                <div class="col-md-12 form-it">
+                                    <label>Series name</label>
+                                    <input type="text" placeholder="Enter keywords">
+                                </div>
+
+                                <div class="col-md-12 form-it">
+                                    <label>Genres</label>
+                                    <div class="group-ip">
+                                        <select multiple class="ui fluid dropdown">
+                                            <option value="">Enter to filter genres</option>
+                                            <option>Drama</option>
+                                            <option>Action</option>
+                                            <option>Crime</option>
+                                            <option>Comedy</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 form-it">
+                                    <label>Rating Range</label>
+                                    <select>
+                                        <option>8 and Above</option>
+                                        <option>6 - 7</option>
+                                        <option>4 - 5</option>
+                                        <option>Below 4</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <input class="submit" type="submit" value="submit">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="ads">
+                        <img src="/Film-Review-Movie-Database/images/uploads/ads1.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

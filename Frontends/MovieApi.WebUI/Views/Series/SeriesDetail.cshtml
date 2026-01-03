@@ -1,7 +1,6 @@
-﻿@using MovieApi.Dto.Dtos.MovieDtos
-@model ResultMovieDto
+﻿@model ResultSeriesDto
 @{
-    ViewData["Title"] = "MovieDetail";
+	ViewData["Title"] = @Model.Title;
     Layout = "~/Views/UserWebUILayout/LayoutUI.cshtml";
 }
 
@@ -23,7 +22,7 @@
 	<div class="container">
 		<div class="row ipad-width2">
 
-			@await Component.InvokeAsync("_MovieImageAndWatchTrailerComponentPartial", new {resultMovieDto = Model})
+			@await Component.InvokeAsync("_SeriesImageAndWatchTrailerComponentPartial", new { resultSeriesDto = Model })
 
 
 
@@ -31,9 +30,9 @@
 				<div class="movie-single-ct main-content">
 					<h1 class="bd-hd">@Model.Title <span>@Model.CreatedYear</span></h1>
 
-					@await Component.InvokeAsync("_MovieDetailShareSocialMediaComponentPartial")
+					@await Component.InvokeAsync("_SeriesDetailShareSocialMediaComponentPartial")
 
-					@await Component.InvokeAsync("_MovieDetailRateComponentPartial", new { resultMovieDto = Model })
+					@await Component.InvokeAsync("_SeriesDetailRateComponentPartial", new { resultSeriesDto = Model })
 					
 
 					<div class="movie-tabs">
@@ -47,7 +46,7 @@
 							</ul>
 							<div class="tab-content">
 
-								@await Component.InvokeAsync("_MovieDetailOverviewComponentPartial", new { resultMovieDto = Model })
+								@await Component.InvokeAsync("_SeriesDetailOverviewComponentPartial", new { resultSeriesDto = Model })
 								
 
 								<div id="reviews" class="tab review">
@@ -55,7 +54,7 @@
 										<div class="rv-hd">
 											<div class="div">
 												<h3>Related Movies To</h3>
-												<h2>Skyfall: Quantum of Spectre</h2>
+												<h2>@Model.Title</h2>
 											</div>
 											<a href="#" class="redbtn">Write Review</a>
 										</div>
@@ -542,7 +541,7 @@
 									</div>
 								</div>
 								
-								@await Component.InvokeAsync("_MovieDetailRelatedMoviesComponentPartial")
+								@await Component.InvokeAsync("_SeriesDetailRelatedSeriesComponentPartial", new { resultSeriesDto = Model })
 							</div>
 						</div>
 					</div>
