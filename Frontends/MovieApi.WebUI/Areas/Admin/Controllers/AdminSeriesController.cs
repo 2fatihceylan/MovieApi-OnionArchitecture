@@ -96,7 +96,7 @@ namespace MovieApi.WebUI.Areas.Admin.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> CreateMovie(AdminCreateSeriesDto adminCreateSeriesDto)
+        public async Task<IActionResult> CreateSeries(AdminCreateSeriesDto adminCreateSeriesDto)
         {
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(adminCreateSeriesDto);
