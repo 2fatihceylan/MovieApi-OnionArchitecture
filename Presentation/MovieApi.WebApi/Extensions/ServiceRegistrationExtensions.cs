@@ -18,6 +18,7 @@ namespace MovieApi.WebApi.Extensions
             services.AddScoped<RemoveCategoryCommandHandler>();
             services.AddScoped<GetMovieQueryHandler>();
             services.AddScoped<GetMovieByIdQueryHandler>();
+            services.AddScoped<GetMovieWithCategoryQueryHandler>();
             services.AddScoped<CreateMovieCommandHandler>();
             services.AddScoped<UpdateMovieCommandHandler>();
             services.AddScoped<RemoveMovieCommandHandler>();

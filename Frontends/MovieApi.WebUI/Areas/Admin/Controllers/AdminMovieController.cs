@@ -40,7 +40,7 @@ namespace MovieApi.WebUI.Areas.Admin.Controllers
 
             var client = _httpClientFactory.CreateClient();
 
-            var responseMessage = await client.GetAsync("https://localhost:7216/api/Movie");
+            var responseMessage = await client.GetAsync("https://localhost:7216/api/Movie/GetMovieWithCategory");
 
             if (responseMessage.IsSuccessStatusCode)
             {

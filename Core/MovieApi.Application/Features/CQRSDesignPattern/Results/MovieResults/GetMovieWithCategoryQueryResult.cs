@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MovieApi.Dto.Dtos.AdminMovieDtos
+namespace MovieApi.Application.Features.CQRSDesignPattern.Results.MovieResults
 {
-    public class AdminResultMovieDto
+    public class GetMovieWithCategoryQueryResult
     {
-
         public int MovieId { get; set; }
         public string Title { get; set; }
         public string CoverImageUrl { get; set; }
@@ -18,8 +17,7 @@ namespace MovieApi.Dto.Dtos.AdminMovieDtos
         public string CreatedYear { get; set; }
         public string Status { get; set; }
 
-        public int CategoryId { get; set; } 
-
+        public int CategoryId { get; set; }
         public string CategoryName { get; set; }
     }
 }

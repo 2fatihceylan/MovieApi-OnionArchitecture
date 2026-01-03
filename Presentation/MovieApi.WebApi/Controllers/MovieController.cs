@@ -10,23 +10,26 @@ namespace MovieApi.WebApi.Controllers
     public class MovieController : ControllerBase
     {
 
-        GetMovieByIdQueryHandler _getMovieByIdQueryHandler;
-        GetMovieQueryHandler _getMovieQueryHandler;
-        CreateMovieCommandHandler _createMovieCommandHandler;
-        UpdateMovieCommandHandler _updateMovieCommandHandler;
-        RemoveMovieCommandHandler   _removeMovieCommandHandler;
-
+        private GetMovieByIdQueryHandler _getMovieByIdQueryHandler;
+        private GetMovieQueryHandler _getMovieQueryHandler;
+        private CreateMovieCommandHandler _createMovieCommandHandler;
+        private UpdateMovieCommandHandler _updateMovieCommandHandler;
+        private RemoveMovieCommandHandler   _removeMovieCommandHandler;
+        private GetMovieWithCategoryQueryHandler _getMovieWithCategoryQueryHandler;
         public MovieController(GetMovieByIdQueryHandler getMovieByIdQueryHandler, 
             GetMovieQueryHandler getMovieQueryHandler, 
             CreateMovieCommandHandler createMovieCommandHandler, 
             UpdateMovieCommandHandler updateMovieCommandHandler, 
-            RemoveMovieCommandHandler removeMovieCommandHandler)
+            RemoveMovieCommandHandler removeMovieCommandHandler,
+            GetMovieWithCategoryQueryHandler getMovieWithCategoryQueryHandler
+            )
         {
             _getMovieByIdQueryHandler = getMovieByIdQueryHandler;
             _getMovieQueryHandler = getMovieQueryHandler;
             _createMovieCommandHandler = createMovieCommandHandler;
             _updateMovieCommandHandler = updateMovieCommandHandler;
             _removeMovieCommandHandler = removeMovieCommandHandler;
+            _getMovieWithCategoryQueryHandler = getMovieWithCategoryQueryHandler;
         }
 
 
@@ -74,5 +77,15 @@ namespace MovieApi.WebApi.Controllers
             return Ok(value);
         }
 
+
+
+
+        [HttpGet("GetMovieWithCategory")]
+        public async Task<IActionResult> GetMovieWithCategory()
+        {
+            var value = await _getMovieWithCategoryQueryHandler.Handle();
+
+            return Ok(value);
+        }
     }
 }
