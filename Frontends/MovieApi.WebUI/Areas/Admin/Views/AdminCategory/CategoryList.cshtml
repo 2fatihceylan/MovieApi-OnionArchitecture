@@ -183,7 +183,7 @@
             
                     <th>Delete</th>
                     <th>Update</th>
-                    <th>Details</th>
+                 
                 </tr>
             </thead>
             <tbody>
@@ -225,8 +225,8 @@
                             </a>
 
                         </td>
-                        <td><a href="#" class="action-btn btn-update">Update</a></td>
-                        <td><a href="#" class="action-btn btn-detail">Details</a></td>
+                        <td><a asp-area="Admin" asp-controller="AdminCategory" asp-action="UpdateCategory" asp-route-id="@item.CategoryId" class="action-btn btn-update">Update</a></td>
+                       
                     </tr>
                 }
             </tbody>

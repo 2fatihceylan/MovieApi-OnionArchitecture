@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MovieApi.Dto.Dtos.AdminCategoryDtos;
+using MovieApi.Dto.Dtos.AdminMovieDtos;
 using Newtonsoft.Json;
 using System.Text;
 
@@ -70,6 +71,46 @@ namespace MovieApi.WebUI.Areas.Admin.Controllers
         }
 
 
+
+
+        [HttpGet]
+        public async Task<IActionResult> UpdateCategory(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+
+            var responseMessage = await client.GetAsync("https://localhost:7216/api/Categories/GetCategory?id=" + id);
+
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var jsonData = await responseMessage.Content.ReadAsStringAsync();
+                var value = JsonConvert.DeserializeObject<AdminUpdateCategory>(jsonData);
+                return View(value);
+            }
+
+
+            return View();
+
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateCategory(AdminUpdateCategory adminUpdateCategory)
+        {
+
+            var client = _httpClientFactory.CreateClient();
+            var jsonData = JsonConvert.SerializeObject(adminUpdateCategory);
+
+            StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+            var responseMessage = await client.PutAsync("https://localhost:7216/api/Categories", stringContent);
+
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction("CategoryList");
+            }
+            return View();
+
+        }
 
 
         public async Task<IActionResult> DeleteCategory(int id)

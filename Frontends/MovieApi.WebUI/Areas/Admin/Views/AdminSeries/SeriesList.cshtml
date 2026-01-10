@@ -236,8 +236,8 @@
                                 Delete
                             </a>
                         </td>
-                        <td><a href="#" class="action-btn btn-update">Update</a></td>
-                        <td><a href="#" class="action-btn btn-detail">Details</a></td>
+                        <td><a asp-area="Admin" asp-controller="AdminSeries" asp-action="UpdateSeries" asp-route-id="@item.SeriesId" class="action-btn btn-update">Update</a></td>
+                        <td><a asp-area="Admin" asp-controller="AdminSeries" asp-action="SeriesDetail" asp-route-id="@item.SeriesId" class="action-btn btn-detail">Details</a></td>
                     </tr>
                 }
             </tbody>

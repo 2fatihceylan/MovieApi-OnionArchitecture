@@ -206,6 +206,25 @@ namespace MovieApi.WebUI.Areas.Admin.Controllers
 
 
 
+        [HttpGet]
+        public async Task<IActionResult> MovieDetail(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+
+            var responseMessageMovie = await client.GetAsync("https://localhost:7216/api/Movie/GetMovie?id=" + id);
+
+            if (responseMessageMovie.IsSuccessStatusCode)
+            {
+                var jsonData = await responseMessageMovie.Content.ReadAsStringAsync();
+                var value = JsonConvert.DeserializeObject<AdminResultMovieDto>(jsonData);
+                return View(value);
+            }
+            return View();
+        }
+
+
+
+
         public async Task<IActionResult> DeleteMovie(int id)
         {
             var client = _httpClientFactory.CreateClient();
