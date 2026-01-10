@@ -27,6 +27,7 @@ namespace MovieApi.WebApi.Extensions
             services.AddScoped<UpdateSeriesCommandHandler>();
             services.AddScoped<RemoveSeriesCommandHandler>();
             services.AddScoped<CreateSeriesCommandHandler>();
+            services.AddScoped<GetSeriesWithCategoryQueryHandler>();
 
 
 

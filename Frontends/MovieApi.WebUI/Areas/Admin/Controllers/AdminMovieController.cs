@@ -123,6 +123,87 @@ namespace MovieApi.WebUI.Areas.Admin.Controllers
 
 
 
+        [HttpGet]
+        public async Task<IActionResult> UpdateMovie(int id)
+        {
+
+            var client = _httpClientFactory.CreateClient();
+            List<SelectOptionCategoryDto> categories = new List<SelectOptionCategoryDto>();
+
+            try
+            {
+                var responseMessage = await client.GetAsync("https://localhost:7216/api/Categories");
+
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    var jsonData = await responseMessage.Content.ReadAsStringAsync();
+                    var values = JsonConvert.DeserializeObject<List<SelectOptionCategoryDto>>(jsonData);
+                    categories = values ?? new List<SelectOptionCategoryDto>();
+                }
+                else
+                {
+                    // İsteğin başarısız olduğu durumda hata içeriğini okuyup gösterim için saklayabilirsiniz.
+                    var errorContent = await responseMessage.Content.ReadAsStringAsync();
+                    ViewBag.ErrorMessage = $"Kategori alınamadı. Durum: {(int)responseMessage.StatusCode} {responseMessage.ReasonPhrase}. İçerik: {errorContent}";
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ErrorMessage = $"Kategori çağrısı sırasında hata oluştu: {ex.Message}";
+            }
+
+            // Eğer uzaktan veri yoksa veya boşsa bir yedek liste kullan.
+            if (categories == null || !categories.Any())
+            {
+                categories = new List<SelectOptionCategoryDto>
+                {
+                    new SelectOptionCategoryDto { CategoryId = 1, CategoryName = "Ball" },
+                    new SelectOptionCategoryDto { CategoryId = 2, CategoryName = "Hat" }
+                };
+            }
+
+            ViewBag.Categories = categories;
+
+
+
+
+            var responseMessageMovie = await client.GetAsync("https://localhost:7216/api/Movie/GetMovie?id="+id);
+
+            if (responseMessageMovie.IsSuccessStatusCode)
+            {
+                var jsonData = await responseMessageMovie.Content.ReadAsStringAsync();
+                var value = JsonConvert.DeserializeObject<AdminUpdateMovieDto>(jsonData);
+                return View(value);
+            }
+
+
+            return View();
+
+
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateMovie(AdminUpdateMovieDto adminUpdateMovieDto)
+        {
+
+
+            var client = _httpClientFactory.CreateClient();
+            var jsonData = JsonConvert.SerializeObject(adminUpdateMovieDto);
+
+            StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+            var responseMessage = await client.PutAsync("https://localhost:7216/api/Movie", stringContent);
+
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction("MovieList");
+            }
+            return View();
+
+        }
+
+
 
 
         public async Task<IActionResult> DeleteMovie(int id)

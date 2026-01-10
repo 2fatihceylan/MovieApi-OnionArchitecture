@@ -1,0 +1,217 @@
+﻿@model AdminUpdateMovieDto
+
+@{
+    ViewData["Title"] = "Update Movie";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<style>
+    :root {
+        --primary: #6366f1;
+        --success: #10b981;
+        --danger: #ef4444;
+        --warning: #f59e0b;
+        --bg-soft: #f3f4f6;
+        --text-dark: #1f2937;
+        --text-muted: #6b7280;
+        --radius: 12px;
+    }
+
+    body {
+        background: var(--bg-soft);
+        font-family: 'Inter', sans-serif;
+    }
+
+    *, *::before, *::after {
+        box-sizing: border-box;
+    }
+
+    ion-icon {
+        font-size: 22px;
+    }
+
+    .admin-card {
+        background: #ffffff;
+        border-radius: var(--radius);
+        padding: 34px;
+        box-shadow: 0 10px 28px rgba(0,0,0,.15);
+        max-width: 800px;
+        margin: 40px auto;
+        border: 1px solid #e5e7eb;
+    }
+
+    .admin-title {
+        font-size: 1.9rem;
+        font-weight: 700;
+        color: var(--text-dark);
+        margin-bottom: 26px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 22px;
+    }
+
+    .form-group {
+        margin-bottom: 22px;
+    }
+
+        .form-group label {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 14px;
+            border-radius: var(--radius);
+            border: 1px solid #c7c9fc;
+            background: #fff;
+            font-size: 15px;
+            transition: 0.2s ease;
+        }
+
+            .form-group input:focus,
+            .form-group textarea:focus {
+                border-color: var(--primary);
+                box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.20);
+                outline: none;
+            }
+
+    textarea {
+        min-height: 130px;
+        resize: vertical;
+    }
+
+    .btn-area {
+        display: flex;
+        gap: 12px;
+        margin-top: 18px;
+    }
+
+    .btn-primary-soft {
+        background: var(--primary);
+        color: #fff;
+        padding: 13px 22px;
+        border-radius: var(--radius);
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: none;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+        .btn-primary-soft:hover {
+            background: #5850ec;
+        }
+
+    .btn-secondary {
+        background: #6b7280;
+        color: #fff;
+        padding: 13px 22px;
+        border-radius: var(--radius);
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        transition: 0.2s;
+    }
+
+        .btn-secondary:hover {
+            background: #4b5563;
+        }
+</style>
+
+<div class="admin-card">
+    <div class="admin-title">
+        <ion-icon name="film-outline"></ion-icon>
+        Update Movie
+    </div>
+
+    <form asp-action="UpdateMovie" method="post">
+
+        <!-- MovieId -->
+        <input type="hidden" asp-for="MovieId" />
+
+        <div class="form-group">
+            <label>Movie Title</label>
+            <input asp-for="Title" />
+        </div>
+
+        <div class="grid-2">
+            <div class="form-group">
+                <label>Cover Image URL</label>
+                <input asp-for="CoverImageUrl" />
+            </div>
+
+            <div class="form-group">
+                <label>Rating (0 - 10)</label>
+                <input asp-for="Rating" type="number" step="0.1" />
+            </div>
+
+            <div class="form-group">
+                <label>Category</label>
+                <select asp-for="CategoryId" class="form-control">
+                    @foreach (var cat in ViewBag.Categories)
+                    {
+                        <option value="@cat.CategoryId">@cat.CategoryName</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div class="form-group">
+                <label>Duration</label>
+                <input asp-for="Duration" />
+            </div>
+
+            <div class="form-group">
+                <label>Release Date</label>
+                <input asp-for="ReleaseDate" type="date" />
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div class="form-group">
+                <label>Created Year</label>
+                <input asp-for="CreatedYear" />
+            </div>
+
+            <div class="form-group">
+                <label>Status</label>
+                <select asp-for="Status">
+                    <option value="true">Active</option>
+                    <option value="false">Passive</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Description</label>
+            <textarea asp-for="Description"></textarea>
+        </div>
+
+        <div class="btn-area">
+            <button type="submit" class="btn-primary-soft">
+                <ion-icon name="save-outline"></ion-icon>
+                Update Movie
+            </button>
+
+            <a asp-action="MovieList" class="btn-secondary">
+                Cancel
+            </a>
+        </div>
+
+    </form>
+</div>

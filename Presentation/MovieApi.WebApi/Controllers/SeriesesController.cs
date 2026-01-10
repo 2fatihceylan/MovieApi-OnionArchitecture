@@ -14,19 +14,22 @@ namespace MovieApi.WebApi.Controllers
         CreateSeriesCommandHandler _createSeriesCommandHandler;
         UpdateSeriesCommandHandler _updateSeriesCommandHandler;
         RemoveSeriesCommandHandler _removeSeriesCommandHandler;
+        GetSeriesWithCategoryQueryHandler _getSeriesWithCategoryQueryHandler;
 
 
         public SeriesesController(GetSeriesByIdQueryHandler getSeriesByIdQueryHandler,
             GetSeriesQueryHandler getSeriesQueryHandler,
             CreateSeriesCommandHandler createSeriesCommandHandler,
             UpdateSeriesCommandHandler updateSeriesCommandHandler,
-            RemoveSeriesCommandHandler removeSeriesCommandHandler)
+            RemoveSeriesCommandHandler removeSeriesCommandHandler,
+            GetSeriesWithCategoryQueryHandler getSeriesWithCategoryQueryHandler)
         {
             _getSeriesByIdQueryHandler = getSeriesByIdQueryHandler;
             _getSeriesQueryHandler = getSeriesQueryHandler;
             _createSeriesCommandHandler = createSeriesCommandHandler;
             _updateSeriesCommandHandler = updateSeriesCommandHandler;
             _removeSeriesCommandHandler = removeSeriesCommandHandler;
+            _getSeriesWithCategoryQueryHandler = getSeriesWithCategoryQueryHandler;
         }
 
 
@@ -71,6 +74,18 @@ namespace MovieApi.WebApi.Controllers
         public async Task<IActionResult> GetSeriesById(int id)
         {
             var value = await _getSeriesByIdQueryHandler.Handle(new GetSeriesByIdQuery(id));
+
+            return Ok(value);
+        }
+
+
+
+
+
+        [HttpGet("GetSeriesWithCategory")]
+        public async Task<IActionResult> GetSeriesWithCategory()
+        {
+            var value = await _getSeriesWithCategoryQueryHandler.Handle();
 
             return Ok(value);
         }

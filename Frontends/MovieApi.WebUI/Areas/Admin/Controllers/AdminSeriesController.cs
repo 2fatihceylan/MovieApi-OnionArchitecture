@@ -26,7 +26,7 @@ namespace MovieApi.WebUI.Areas.Admin.Controllers
         {
             var client = _httpClientFactory.CreateClient();
 
-            var responseMessage = await client.GetAsync("https://localhost:7216/api/Serieses");
+            var responseMessage = await client.GetAsync("https://localhost:7216/api/Serieses/GetSeriesWithCategory");
 
             if (responseMessage.IsSuccessStatusCode)
             {

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MovieApi.Dto.Dtos.AdminSeriesDto
+namespace MovieApi.Application.Features.CQRSDesignPattern.Results.SeriesResults
 {
-    public class AdminResultSeriesDto
+    public class GetSeriesWithCategoryQueryResult
     {
         public int SeriesId { get; set; }
         public string Title { get; set; }
@@ -22,6 +22,7 @@ namespace MovieApi.Dto.Dtos.AdminSeriesDto
         public int EpisodeCount { get; set; }
 
         public int CategoryId { get; set; }
+
         public string CategoryName { get; set; }
     }
 }
